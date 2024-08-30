@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 
@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "lightgrey",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
 const Main = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <AppBar/>
       <RepositoryList/>
     </View>

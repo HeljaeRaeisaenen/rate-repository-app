@@ -1,12 +1,14 @@
 const theme = {
   colors: {
-    textPrimary: "#24292e",
-    textSecondary: "#586069",
-    primary: "#0366d6",
-    bg: "lightblue",
+    textPrimary: "black",
+    textSecondary: "white",
+    bg: "white",
+    accent: "lightblue",
+    accent2: "lightpink",
   },
   fontSizes: {
     title: 32,
+    heading: 28,
     body: 14,
     subheading: 16,
   },

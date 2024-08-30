@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Pressable } from 'react-native';
 import Constants from 'expo-constants';
 import Text from './Text';
 import theme from './theme';
@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-    backgroundColor: theme.colors.bg,
+    alignSelf: "stretch",
+    backgroundColor: theme.colors.accent,
   },
   appBar: {
     fontSize: theme.fontSizes.title,
@@ -18,7 +19,11 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-  return <View style={styles.container}><Text style={styles.appBar}>Repositories</Text></View>;
+  return <View style={styles.container}>
+    <Pressable>
+      <Text style={styles.appBar}>Repositories</Text>
+    </Pressable>
+  </View>;
 };
 
 export default AppBar;
