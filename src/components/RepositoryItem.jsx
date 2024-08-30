@@ -18,21 +18,23 @@ const styles = StyleSheet.create({
     title: {
       fontSize: theme.fontSizes.heading,
       fontWeight: theme.fontWeights.bold,
-      padding: 10,
+      padding: 5,
       width:  Dimensions.get('window').width * 0.8
     },
     textArea: {
       flexWrap: "wrap",
       flexShrink: 1,
+      flex: 1,
       flexGrow: 1,
       flexDirection: "row",
-      padding: 10,
+      padding: 5,
     },
     img: {
       alignSelf: "flex-start",
       width: 60,
       height: 60,
-      borderRadius: 5
+      borderRadius: 5,
+      marginRight: 10,
     },
     stats: {
       flexDirection: "row",
@@ -54,6 +56,7 @@ const RepositoryItem = props => {
     return <View style={styles.item}>
       <View style={{
         flexDirection: "row",
+        flex: 1,
         flexWrap: "nowrap",
         alignItems: "space-between"
         }}>
@@ -61,7 +64,7 @@ const RepositoryItem = props => {
           style={styles.img}
           source={{uri: props.item.ownerAvatarUrl}}
         />
-        <View style={{flexDirection: "column"}}>
+        <View style={{flexDirection: "column", }}>
           <Text style={styles.title}>
             {props.item.fullName}
           </Text>
@@ -75,7 +78,7 @@ const RepositoryItem = props => {
               borderRadius: 3,
               alignSelf: "flex-start",
               padding: 5,
-              margin: 10,
+              margin: 5,
               }}>
               <Text style={{color: theme.colors.textSecondary}}>
                 {props.item.language}
