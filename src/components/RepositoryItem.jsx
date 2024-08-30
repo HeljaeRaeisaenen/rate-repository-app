@@ -19,12 +19,13 @@ const styles = StyleSheet.create({
       fontSize: theme.fontSizes.heading,
       fontWeight: theme.fontWeights.bold,
       padding: 10,
-      width:  Dimensions.get('window').width * 0.5
+      width:  Dimensions.get('window').width * 0.8
     },
     textArea: {
       flexWrap: "wrap",
       flexShrink: 1,
-      flexDirection: "column",
+      flexGrow: 1,
+      flexDirection: "row",
       padding: 10,
     },
     img: {
@@ -35,6 +36,8 @@ const styles = StyleSheet.create({
     },
     stats: {
       flexDirection: "row",
+      padding: 10,
+      alignContent: "space-between"
     },
     statItem: {
       flexDirection: "column",
@@ -52,32 +55,35 @@ const RepositoryItem = props => {
       <View style={{
         flexDirection: "row",
         flexWrap: "nowrap",
-        //alignContent: "space-between",
         alignItems: "space-between"
         }}>
         <Image 
           style={styles.img}
           source={{uri: props.item.ownerAvatarUrl}}
         />
-        <View>
+        <View style={{flexDirection: "column"}}>
           <Text style={styles.title}>
             {props.item.fullName}
           </Text>
-          <Text style={styles.textArea}>
+          <View style={styles.textArea}>
             <Text style={styles.textArea}>
-              &quot;{props.item.description}&quot;{"\n\n"}
+              &quot;{props.item.description}&quot;
             </Text>
-            <View style={{
+          </View>
+          <View style={{
               backgroundColor: theme.colors.accent2,
               borderRadius: 3,
+              alignSelf: "flex-start",
+              padding: 5,
+              margin: 10,
               }}>
               <Text style={{color: theme.colors.textSecondary}}>
                 {props.item.language}
               </Text>
             </View>
-          </Text>
           </View>
           </View>
+          
           <View style={styles.stats}>
             <View style={styles.statItem}>
               <Text style={styles.statText}>
