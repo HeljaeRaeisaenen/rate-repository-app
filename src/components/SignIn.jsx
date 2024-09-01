@@ -1,4 +1,3 @@
-import Text from './Text';
 import LogInForm from './LogInForm';
 
 const SignIn = () => {
