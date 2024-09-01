@@ -1,7 +1,10 @@
 import Text from './Text';
+import LogInForm from './LogInForm';
 
 const SignIn = () => {
-  return <Text>The sign-in view</Text>;
+  return <>
+    <LogInForm/>
+  </>;
 };
 
 export default SignIn;
