@@ -6,9 +6,7 @@ const styles = StyleSheet.create({
     item: {
       display: "flex",
       flexDirection: "column",
-      alignContent: "center",
-      alignItems: "flex-start",
-      maxWidth: Dimensions.get('window').width,
+      maxWidth: Dimensions.get('window').width - 16,
       padding: 20,
       marginVertical: 4,
       marginHorizontal: 8,

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "lightgrey",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
 });
 
@@ -22,8 +22,8 @@ const Main = () => {
       <AppBar/>
       <Routes>
         <Route path="/" element={<RepositoryList />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>
   );
