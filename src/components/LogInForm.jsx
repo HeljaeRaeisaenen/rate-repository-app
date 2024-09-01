@@ -75,7 +75,7 @@ const LogInForm = () => {
         <TextInput
           style={[
             styles.textInput,
-            formik.errors.username ? {borderColor: theme.colors.error} : {}
+            formik.touched.username && formik.errors.username ? {borderColor: theme.colors.error} : {}
           ]}
           placeholder="Username"
           value={formik.values.username}
@@ -93,7 +93,7 @@ const LogInForm = () => {
         <TextInput
           style={[
             styles.textInput,
-            formik.errors.password ? {borderColor: theme.colors.error} : {}
+            formik.touched.password && formik.errors.password ? {borderColor: theme.colors.error} : {}
           ]}
           placeholder="Password"
           secureTextEntry={true}
