@@ -5,6 +5,7 @@ const theme = {
     bg: "white",
     accent: "lightblue",
     accent2: "lightpink",
+    error: "darkred",
   },
   fontSizes: {
     title: 32,
