@@ -1,8 +1,22 @@
 import LogInForm from './LogInForm';
+import useSignIn from '../hooks/useSignIn';
 
 const SignIn = () => {
+  const [signIn] = useSignIn();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+
+    try {
+      const { data } = await signIn({ username, password });
+      console.log(data.authenticate);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return <>
-    <LogInForm/>
+    <LogInForm onSubmit={onSubmit}/>
   </>;
 };
 
