@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   });
 
 const RepositoryItem = props => {
-    return <View style={styles.item}>
+    return <View testID={"repositoryItem"} style={styles.item}>
       <View style={{
         flexDirection: "row",
         flex: 1,
