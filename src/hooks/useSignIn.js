@@ -12,10 +12,10 @@ const useSignIn = () => {
     const { data } = await authenticate({
       variables: { credentials: { username, password } },
     });
-    await authStorage.setAccessToken(data.authenticate);
+    await authStorage.setAccessToken(data.authenticate.accessToken);
     client.resetStore();
 
-    return data;
+    return { data };
   };
 
   return [signIn, result];
