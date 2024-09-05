@@ -59,7 +59,7 @@ describe("RepositoryList", () => {
       expect(elements[0]).toHaveTextContent("1.6k forks");
       expect(elements[0]).toHaveTextContent("88 rating");
       expect(elements[0]).toHaveTextContent("3 reviews");
-      expect(elements[0]).toHaveTextContent("Typescript");
+      expect(elements[0]).toHaveTextContent("TypeScript");
 
       expect(elements[1]).toHaveTextContent("async-library/react-async");
       expect(elements[1]).toHaveTextContent(
