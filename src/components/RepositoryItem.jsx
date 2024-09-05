@@ -1,6 +1,10 @@
-import { StyleSheet, View, Image, Dimensions } from "react-native";
+import { StyleSheet, View, Image, Dimensions, Pressable } from "react-native";
+import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 import Text from "./Text";
 import theme from "./theme";
+import useRepository from "../hooks/useRepository";
 
 const styles = StyleSheet.create({
     item: {
@@ -50,73 +54,87 @@ const styles = StyleSheet.create({
     }
   });
 
+const UrlButton = props => {
+  if (props.listView) return;
+  return <View>
+    <Text>this is a singel item</Text>
+  </View>
+}
+
 const RepositoryItem = props => {
-    return <View testID={"repositoryItem"} style={styles.item}>
-      <View style={{
-        flexDirection: "row",
-        flex: 1,
-        flexWrap: "nowrap",
-        alignItems: "space-between"
-        }}>
-        <Image 
-          style={styles.img}
-          source={{uri: props.item.ownerAvatarUrl}}
-        />
-        <View style={{flexDirection: "column", }}>
-          <Text style={styles.title}>
-            {props.item.fullName}
+  console.log("got repo",useRepository({id: useParams().repoId}));
+  console.log("params", useParams().repoId)
+  const item = props.item ? props.item : useRepository({id: useParams().repoId}).repository;
+  if (!item) return <></>
+
+  //console.log("item ", item)
+
+  return <View testID={"repositoryItem"} style={styles.item}>
+    <View style={{
+      flexDirection: "row",
+      flex: 1,
+      flexWrap: "nowrap",
+      alignItems: "space-between"
+    }}>
+      <Image 
+        style={styles.img}
+        source={{uri: item.ownerAvatarUrl}}
+      />
+      <View style={{flexDirection: "column", }}>
+        <Text style={styles.title}>
+          {item.fullName}
+        </Text>
+        <View style={styles.textArea}>
+          <Text style={styles.textArea}>
+            &quot;{item.description}&quot;
           </Text>
-          <View style={styles.textArea}>
-            <Text style={styles.textArea}>
-              &quot;{props.item.description}&quot;
+        </View>
+        <View style={{
+            backgroundColor: theme.colors.accent2,
+            borderRadius: 3,
+            alignSelf: "flex-start",
+            padding: 5,
+            margin: 5,
+            }}>
+            <Text style={{color: theme.colors.textSecondary}}>
+              {item.language}
             </Text>
           </View>
-          <View style={{
-              backgroundColor: theme.colors.accent2,
-              borderRadius: 3,
-              alignSelf: "flex-start",
-              padding: 5,
-              margin: 5,
-              }}>
-              <Text style={{color: theme.colors.textSecondary}}>
-                {props.item.language}
-              </Text>
-            </View>
-          </View>
-          </View>
-          
-          <View style={styles.stats}>
-            <View style={styles.statItem}>
-              <Text style={styles.statText}>
-                {Math.round(props.item.forksCount / 100)/10}k
-              </Text>
-              <Text> forks
-              </Text>
-            </View>
-            <View style={styles.statItem}>
-            <Text style={styles.statText}>
-                {Math.round(props.item.stargazersCount / 100)/10}k
-              </Text>
-              <Text> stars
-              </Text>
-            </View>
-            <View style={styles.statItem}>
-            <Text style={styles.statText}>
-                {props.item.ratingAverage}
-              </Text>
-              <Text> rating
-              </Text>
-            </View>
-            <View style={styles.statItem}>
-            <Text style={styles.statText}>
-                {props.item.reviewCount}
-              </Text>
-              <Text> reviews
-              </Text>
-            
-          </View>
+        </View>
+      </View>
+        
+      <View style={styles.stats}>
+        <View style={styles.statItem}>
+          <Text style={styles.statText}>
+            {Math.round(item.forksCount / 100)/10}k
+          </Text>
+          <Text> forks
+          </Text>
+        </View>
+        <View style={styles.statItem}>
+        <Text style={styles.statText}>
+            {Math.round(item.stargazersCount / 100)/10}k
+          </Text>
+          <Text> stars
+          </Text>
+        </View>
+        <View style={styles.statItem}>
+        <Text style={styles.statText}>
+            {item.ratingAverage}
+          </Text>
+          <Text> rating
+          </Text>
+        </View>
+        <View style={styles.statItem}>
+        <Text style={styles.statText}>
+            {item.reviewCount}
+        </Text>
+        <Text> reviews
+        </Text>
       </View>
     </View>
+    {UrlButton({listView: props.listView})}
+  </View>
 }
 
 export default RepositoryItem;
