@@ -1,43 +1,10 @@
-import { TextInput, Pressable, View, StyleSheet, Dimensions } from 'react-native';
+import { TextInput, Pressable, View } from 'react-native';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-
 import Text from './Text';
 import theme from './theme';
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    alignContent: "center",
-    alignItems: "flex-start",
-    maxWidth: Dimensions.get('window').width,
-    padding: 20,
-    marginVertical: 4,
-    marginHorizontal: 8,
-    backgroundColor: theme.colors.bg,
-    borderRadius: 8,
-    minWidth: 200,
-  },
-  textInput: {
-    minWidth: 300,
-    borderRadius: 3,
-    borderWidth: 2,
-    borderColor: "grey",
-    padding: 5,
-    margin: 5,
-  },
-  submitButton: {
-    minWidth: 300,
-    alignContent: "center",
-    alignItems: "center",
-    backgroundColor: theme.colors.accent2,
-    borderRadius: 3,
-    padding: 5,
-    margin: 5,
-  }
-});
+import { formStyles as styles } from './styles';
 
 const initialValues = {
   username: '',

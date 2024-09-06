@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import { useParams } from 'react-router-dom';
 import { format } from "date-fns";
 
@@ -6,7 +6,7 @@ import Text from "./Text";
 import theme from "./theme";
 import useRepository from "../hooks/useRepository";
 import RepositoryItem from "./RepositoryItem";
-import { repositoryStyles as styles } from "./RepositoryItem";
+import { repositoryStyles as styles } from "./styles";
 
 const ReviewItem= ({ item }) => {
   return <View style={[styles.item, {flexDirection: "row"}]}>
@@ -33,7 +33,6 @@ const ReviewItem= ({ item }) => {
 }
 
 const SingleRepositoryView = () => {
-  // no props, rendered only in single view, get id from params
   const repository = useRepository({id: useParams().repoId}).repository;
   if (!repository) return <></>
 
@@ -46,7 +45,6 @@ const SingleRepositoryView = () => {
     renderItem={({ item }) => <ReviewItem item={item} />}
     keyExtractor={item => item.id}
     ListHeaderComponent={() => <RepositoryItem item={repository} listView={false}/>}
-    // ...
   />
 }
 

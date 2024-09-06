@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-native";
 
 import LogInForm from './LogInForm';
 import useSignIn from '../hooks/useSignIn';
