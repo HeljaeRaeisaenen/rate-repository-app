@@ -1,10 +1,8 @@
 import { StyleSheet, View, Image, Dimensions, Pressable } from "react-native";
-import { useParams } from 'react-router-dom';
 import * as Linking from 'expo-linking';
 
 import Text from "./Text";
 import theme from "./theme";
-import useRepository from "../hooks/useRepository";
 
 const styles = StyleSheet.create({
     item: {
@@ -77,15 +75,15 @@ const UrlButton = ({listView, url}) => {
     </Pressable>
 }
 
-const RepositoryItem = props => {
-  const item = props.item ? props.item : useRepository({id: useParams().repoId}).repository;
-  if (!item) return <></>
+const RepositoryItem = ({item, listView}) => {
+  // shouled always have prop item
+  //if (!item) return <></>
 
   return <View testID={"repositoryItem"} style={[
     styles.item,
     // This is probably horrible but I can't figure out why it displays so differently in listview
     // and single repo view. The text was hidden, I spent hours and this is my best solution :( 
-    props.listView ? {} : {maxHeight: Dimensions.get('window').height * 0.36,}
+    listView ? {} : {maxHeight: Dimensions.get('window').height * 0.36,}
     ]}>
     <View style={{
       flexDirection: "row",
@@ -143,7 +141,7 @@ const RepositoryItem = props => {
         </Text>
       </View>
     </View>
-    {UrlButton({listView: props.listView, url:item.url})}
+    {UrlButton({listView: listView, url:item.url})}
   </View>
 }
 
