@@ -4,7 +4,7 @@ import * as Linking from 'expo-linking';
 import Text from "./Text";
 import theme from "./theme";
 
-const styles = StyleSheet.create({
+export const repositoryStyles = StyleSheet.create({
     item: {
       display: "flex",
       flex: 1,
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     stats: {
       flexDirection: "row",
       padding: 10,
+      flex: 1,
       alignContent: "space-between"
     },
     statItem: {
@@ -57,13 +58,31 @@ const styles = StyleSheet.create({
       borderRadius: 3,
       padding: 5,
       margin: 5,
+    },
+    ratingIcon: {
+      height: 60,
+      //flexGrow: 1,
+      width: 60,
+      borderRadius: 30,
+      borderWidth: 5,
+      borderColor: theme.colors.accent,
+      alignItems: "center",
+      justifyContent: "center",
+      marginRight: 10,
+    },
+    rating: {
+      color: theme.colors.accent,
+      fontSize: theme.fontSizes.heading,
+      fontWeight: "bold",
     }
   });
+const styles = repositoryStyles;
+
 
 const UrlButton = ({listView, url}) => {
   if (listView) return;
   return <Pressable onPress={() => Linking.openURL(url)}>
-      <View style={[styles.buttonLike, {}]}>
+      <View style={[styles.buttonLike, {flex: 1}]}>
         <Text style={{
           alignSelf: "center",
           color: theme.colors.textSecondary,
@@ -75,19 +94,12 @@ const UrlButton = ({listView, url}) => {
     </Pressable>
 }
 
-const RepositoryItem = ({item, listView}) => {
-  // shouled always have prop item
-  //if (!item) return <></>
-
-  return <View testID={"repositoryItem"} style={[
-    styles.item,
-    // This is probably horrible but I can't figure out why it displays so differently in listview
-    // and single repo view. The text was hidden, I spent hours and this is my best solution :( 
-    listView ? {} : {maxHeight: Dimensions.get('window').height * 0.36,}
-    ]}>
+const RepositoryItem = ({item, listView}) => {  
+  return <View testID={"repositoryItem"} style={styles.item}>
     <View style={{
       flexDirection: "row",
       flexWrap: "nowrap",
+      flex: 1,
       alignContent: "flex-start"
     }}>
       <Image 
