@@ -45,7 +45,8 @@ const AppBar = () => {
       <Link to={"/"}>
         <Text style={styles.appBar}> Repositories</Text>
       </Link>
-      {user ? <>
+      {user ? 
+      <>
         <Link to={"/review"}>
           <Text style={styles.appBar}> Give a review</Text>
         </Link>
@@ -54,9 +55,14 @@ const AppBar = () => {
         </Pressable>
       </>
       : 
-      <Link to={"/signin"}>
-        <Text style={styles.appBar}> Sign in</Text>
-      </Link>
+      <>
+        <Link to={"/signin"}>
+          <Text style={styles.appBar}> Sign in</Text>
+        </Link>
+        <Link to={"/signup"}>
+          <Text style={styles.appBar}> Sign up</Text>
+        </Link>
+      </>
       }
     </ScrollView>
   </View>;
