@@ -1,14 +1,16 @@
 import { View, FlatList } from "react-native";
 import { useParams } from 'react-router-dom';
 import { format } from "date-fns";
+import { withTheme } from 'react-native-paper';
 
 import Text from "./Text";
-import theme from "./theme";
 import useRepository from "../hooks/useRepository";
 import RepositoryItem from "./RepositoryItem";
-import { repositoryStyles as styles } from "./styles";
+import { getRepositoryStyles } from "./styles";
 
-const ReviewItem= ({ item }) => {
+const ReviewItem= ({ item, theme }) => {
+  const styles = getRepositoryStyles();
+
   return <View style={[styles.item, {flexDirection: "row"}]}>
     <View style={styles.ratingIcon}>
       <Text style={styles.rating}>
@@ -17,7 +19,7 @@ const ReviewItem= ({ item }) => {
     </View>
 
     <View style={[styles.textArea, {flexDirection: "column"}]}>
-      <Text style={[styles.textArea,{fontWeight: "bold", fontSize: theme.fontSizes.subheading}]}>
+      <Text style={[styles.textArea, {fontWeight: "bold", fontSize: theme.fontSizes.subheading}]}>
         {item.user.username}
       </Text>
       <Text style={styles.textArea}>
@@ -32,7 +34,7 @@ const ReviewItem= ({ item }) => {
   </View>
 }
 
-const SingleRepositoryView = () => {
+const SingleRepositoryView = ({ theme }) => {
   const repository = useRepository({id: useParams().repoId}).repository;
   if (!repository) return <></>
 
@@ -42,10 +44,10 @@ const SingleRepositoryView = () => {
   
   return <FlatList
     data={reviews}
-    renderItem={({ item }) => <ReviewItem item={item} />}
+    renderItem={({ item }) => <ReviewItem item={item} theme={theme} />}
     keyExtractor={item => item.id}
     ListHeaderComponent={() => <RepositoryItem item={repository} listView={false}/>}
   />
 }
 
-export default SingleRepositoryView;
+export default withTheme(SingleRepositoryView);

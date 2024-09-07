@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
+const ListOrderPicker = () => {
+  return <></>
+}
+
 const RepositoryList = () => {
   const { repositories } = useRepositories();
   const navigate = useNavigate();
@@ -34,6 +38,7 @@ export const RepositoryListContainer = ({ repositories, navigate }) => {
         </Pressable>
       }
       keyExtractor={item => item.id}
+      ListHeaderComponent={() => <ListOrderPicker />}
     />
   );
 };

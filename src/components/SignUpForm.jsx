@@ -1,10 +1,11 @@
 import { TextInput, Pressable, View } from 'react-native';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { withTheme } from 'react-native-paper';
 
 import Text from './Text';
-import theme from './theme';
-import { formStyles as styles } from './styles';
+//import { formStyles as styles } from './styles';
+import { getFormStyles } from './styles';
 
 const initialValues = {
   username: '',
@@ -29,7 +30,9 @@ const validationSchema = yup.object().shape({
     .required("Password confirmation is required."),
 });
 
-const SignUpForm = ( {onSubmit} ) => {
+const SignUpForm = ( {onSubmit, theme} ) => {
+  styles = getFormStyles();
+
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -110,4 +113,4 @@ const SignUpForm = ( {onSubmit} ) => {
   );
 }
 
-export default SignUpForm;
+export default withTheme(SignUpForm);

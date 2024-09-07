@@ -1,35 +1,15 @@
-import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
-import Constants from 'expo-constants';
+import { View, ScrollView, Pressable } from 'react-native';
 import { Link, useNavigate } from 'react-router-native';
 
 import Text from './Text';
-import theme from './theme';
+//import { appBarStyles as styles } from './styles';
+import { getAppBarStyles } from './styles';
 import useAuthenticatedUser from '../hooks/useAuthenticatedUser';
 import useSignOut from '../hooks/useSignOut';
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Constants.statusBarHeight,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignSelf: "stretch",
-    backgroundColor: theme.colors.accent,
-  },
-  appBar: {
-    fontSize: theme.fontSizes.title,
-    color: theme.colors.textSecondary,
-    borderColor: theme.colors.accent2,
-    borderStyle: "dotted",
-    borderRadius: 10,
-    borderWidth: 5,
-    margin: theme.margin,
-    textShadowColor: "black",
-    textShadowRadius: 7,
-  },
-});
 
 const AppBar = () => {
+  const styles = getAppBarStyles();
   const { user } = useAuthenticatedUser();
   const navigate = useNavigate();
   const [signOut] = useSignOut();

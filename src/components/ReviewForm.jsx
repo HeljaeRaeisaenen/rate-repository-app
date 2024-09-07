@@ -1,10 +1,11 @@
 import { TextInput, Pressable, View, ScrollView } from 'react-native';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { withTheme } from 'react-native-paper';
 
 import Text from './Text';
-import theme from './theme';
-import { formStyles as styles } from './styles';
+//import { formStyles as styles } from './styles';
+import { getFormStyles } from './styles';
 
 const initialValues = {
   username: '',
@@ -35,7 +36,9 @@ const validationSchema = yup.object().shape({
   });
 
 
-const ReviewForm = ({onSubmit}) => {
+const ReviewForm = ({onSubmit, theme}) => {
+  const styles = getFormStyles();
+
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -134,4 +137,4 @@ const ReviewForm = ({onSubmit}) => {
   </ScrollView>
 }
 
-export default ReviewForm;
+export default withTheme(ReviewForm);

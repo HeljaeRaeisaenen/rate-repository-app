@@ -1,11 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import { NativeRouter } from "react-router-native";
 import { ApolloProvider } from "@apollo/client";
+import { PaperProvider } from "react-native-paper";
+import { Appearance } from "react-native";
 
 import Main from "./src/components/Main";
 import createApolloClient from "./src/utils/apolloClient";
 import AuthStorage from "./src/utils/authStorage";
 import AuthStorageContext from "./src/contexts/authStorageContext";
+import { theme, darkTheme } from "./src/components/theme";
 
 const authStorage = new AuthStorage();
 const apolloClient = createApolloClient(authStorage);
@@ -16,7 +19,11 @@ const App = () => {
       <NativeRouter>
         <ApolloProvider client={apolloClient}>
           <AuthStorageContext.Provider value={authStorage}>
-            <Main />
+            <PaperProvider
+              theme={Appearance.getColorScheme() === "dark" ? darkTheme : theme}
+            >
+              <Main />
+            </PaperProvider>
           </AuthStorageContext.Provider>
         </ApolloProvider>
       </NativeRouter>

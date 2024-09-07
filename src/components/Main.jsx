@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { Route, Routes, Navigate } from 'react-router-native';
 
 import RepositoryList from './RepositoryList';
@@ -7,19 +7,11 @@ import AppBar from './AppBar';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import CreateReview from './CreateReview';
+import { getMainStyles } from './styles';
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    flexShrink: 1,
-    flex: 1,
-    backgroundColor: "lightgrey",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-});
 
 const Main = () => {
+  const styles = getMainStyles();
   return (
     <View style={styles.container}>
       <AppBar/>

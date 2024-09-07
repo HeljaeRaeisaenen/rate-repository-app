@@ -1,11 +1,12 @@
 import { View, Image, Pressable } from "react-native";
 import * as Linking from 'expo-linking';
+import { withTheme } from 'react-native-paper';
 
 import Text from "./Text";
-import theme from "./theme";
-import { repositoryStyles as styles } from "./styles";
+//import { repositoryStyles as styles } from "./styles";
+import { getRepositoryStyles } from "./styles";
 
-const UrlButton = ({listView, url}) => {
+const UrlButton = ({listView, url, styles}) => {
   if (listView) return;
   return <Pressable onPress={() => Linking.openURL(url)}>
       <View style={[styles.buttonLike, {flex: 1}]}>
@@ -20,7 +21,9 @@ const UrlButton = ({listView, url}) => {
     </Pressable>
 }
 
-const RepositoryItem = ({item, listView}) => {  
+const RepositoryItem = ({item, listView, theme }) => {  
+  const styles = getRepositoryStyles();
+
   return <View testID={"repositoryItem"} style={styles.item}>
     <View style={{
       flexDirection: "row",
@@ -79,8 +82,8 @@ const RepositoryItem = ({item, listView}) => {
         </Text>
       </View>
     </View>
-    {UrlButton({listView: listView, url:item.url})}
+    {UrlButton({listView: listView, url:item.url, styles})}
   </View>
 }
 
-export default RepositoryItem;
+export default withTheme(RepositoryItem);
