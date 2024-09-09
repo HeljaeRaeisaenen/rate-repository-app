@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { FlatList, View, Pressable } from 'react-native';
 import { useNavigate } from "react-router-native";
-import { Menu, Button } from 'react-native-paper';
+import { Menu, Button, Searchbar } from 'react-native-paper';
+import { useDebounce } from 'use-debounce';
 
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/userRepositories';
@@ -33,21 +34,39 @@ const ListOrderPicker = ({setOrderBy, setOrderDirection}) => {
   </View>
 }
 
+const ListSearcher = ({ searchKeyword, setSearchKeyword }) => {
+  return <Searchbar
+      placeholder="Search repositories"
+      onChangeText={setSearchKeyword}
+      value={searchKeyword}
+    />
+}
+
 const RepositoryList = () => {
   const [orderBy, setOrderBy] = useState(null);
   const [orderDirection, setOrderDirection] = useState(null);
-  const { repositories } = useRepositories({orderBy, orderDirection});
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const deKeyword = useDebounce(searchKeyword, 500)[0];
+  const { repositories } = useRepositories({orderBy, orderDirection, searchKeyword: deKeyword});
   const navigate = useNavigate();
 
   return <RepositoryListContainer 
     repositories={repositories}
     navigate={navigate}
     setOrderBy={setOrderBy}
-     setOrderDirection={setOrderDirection}
+    setOrderDirection={setOrderDirection}
+    searchKeyword={searchKeyword}
+    setSearchKeyword={setSearchKeyword}
     />
 };
 
-export const RepositoryListContainer = ({ repositories, navigate, setOrderBy, setOrderDirection }) => {
+export const RepositoryListContainer = ({
+    repositories,
+    navigate,
+    setOrderBy,
+    setOrderDirection,
+    searchKeyword,
+    setSearchKeyword, }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
@@ -62,7 +81,12 @@ export const RepositoryListContainer = ({ repositories, navigate, setOrderBy, se
         </Pressable>
       }
       keyExtractor={item => item.id}
-      ListHeaderComponent={() => <ListOrderPicker setOrderBy={setOrderBy} setOrderDirection={setOrderDirection}/>}
+      ListHeaderComponent={(
+        <View style={{minWidth: 400}}>
+          <ListOrderPicker setOrderBy={setOrderBy} setOrderDirection={setOrderDirection}/>
+          <ListSearcher searchKeyword={searchKeyword} setSearchKeyword={setSearchKeyword} />
+        </View>
+        )}
     />
   );
 };
