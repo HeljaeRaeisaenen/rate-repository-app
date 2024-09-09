@@ -1,29 +1,53 @@
-import { FlatList, View, StyleSheet, Pressable } from 'react-native';
+import { useState } from 'react';
+import { FlatList, View, Pressable } from 'react-native';
 import { useNavigate } from "react-router-native";
+import { Menu, Button } from 'react-native-paper';
 
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/userRepositories';
 
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-});
+const ItemSeparator = () => <View style={{separator: {height: 10,}}} />;
 
-const ItemSeparator = () => <View style={styles.separator} />;
+const ListOrderPicker = ({setOrderBy, setOrderDirection}) => {
+  const [visible, setVisible] = useState(false);
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
 
-const ListOrderPicker = () => {
-  return <></>
+  return <View style={{
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  }}>
+    <Menu visible={visible}
+    onDismiss={closeMenu}
+    anchor={
+      <Button mode='outlined' onPress={openMenu}>Sort</Button>
+    }>
+      <Menu.Item onPress={() => {setOrderBy(null); setOrderDirection(null)}} title="Newest"/>
+      <Menu.Item 
+        onPress={() => {setOrderBy("RATING_AVERAGE");setOrderDirection("DESC");}}
+        title="Highest rated"
+      />
+      <Menu.Item onPress={() => {setOrderBy("RATING_AVERAGE"); setOrderDirection("ASC");}} title="Lowest rated"/>
+      </Menu>
+  </View>
 }
 
 const RepositoryList = () => {
-  const { repositories } = useRepositories();
+  const [orderBy, setOrderBy] = useState(null);
+  const [orderDirection, setOrderDirection] = useState(null);
+  const { repositories } = useRepositories({orderBy, orderDirection});
   const navigate = useNavigate();
 
-  return <RepositoryListContainer repositories={repositories} navigate={navigate} />
+  return <RepositoryListContainer 
+    repositories={repositories}
+    navigate={navigate}
+    setOrderBy={setOrderBy}
+     setOrderDirection={setOrderDirection}
+    />
 };
 
-export const RepositoryListContainer = ({ repositories, navigate }) => {
+export const RepositoryListContainer = ({ repositories, navigate, setOrderBy, setOrderDirection }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
@@ -38,7 +62,7 @@ export const RepositoryListContainer = ({ repositories, navigate }) => {
         </Pressable>
       }
       keyExtractor={item => item.id}
-      ListHeaderComponent={() => <ListOrderPicker />}
+      ListHeaderComponent={() => <ListOrderPicker setOrderBy={setOrderBy} setOrderDirection={setOrderDirection}/>}
     />
   );
 };

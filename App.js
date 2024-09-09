@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { NativeRouter } from "react-router-native";
 import { ApolloProvider } from "@apollo/client";
 import { PaperProvider } from "react-native-paper";
-import { Appearance } from "react-native";
+import { useColorScheme } from "react-native";
 
 import Main from "./src/components/Main";
 import createApolloClient from "./src/utils/apolloClient";
@@ -20,7 +20,7 @@ const App = () => {
         <ApolloProvider client={apolloClient}>
           <AuthStorageContext.Provider value={authStorage}>
             <PaperProvider
-              theme={Appearance.getColorScheme() === "dark" ? darkTheme : theme}
+              theme={useColorScheme() === "dark" ? darkTheme : theme}
             >
               <Main />
             </PaperProvider>

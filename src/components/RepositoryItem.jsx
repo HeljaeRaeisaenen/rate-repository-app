@@ -3,10 +3,9 @@ import * as Linking from 'expo-linking';
 import { withTheme } from 'react-native-paper';
 
 import Text from "./Text";
-//import { repositoryStyles as styles } from "./styles";
 import { getRepositoryStyles } from "./styles";
 
-const UrlButton = ({listView, url, styles}) => {
+const UrlButton = ({listView, url, styles, theme}) => {
   if (listView) return;
   return <Pressable onPress={() => Linking.openURL(url)}>
       <View style={[styles.buttonLike, {flex: 1}]}>
@@ -82,7 +81,7 @@ const RepositoryItem = ({item, listView, theme }) => {
         </Text>
       </View>
     </View>
-    {UrlButton({listView: listView, url:item.url, styles})}
+    {UrlButton({listView: listView, url:item.url, styles, theme})}
   </View>
 }
 

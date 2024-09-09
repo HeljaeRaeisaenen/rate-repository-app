@@ -1,8 +1,12 @@
 import { Platform } from "react-native";
-import { MD3LightTheme as DefaultTheme } from "react-native-paper";
+import {
+  MD3LightTheme,
+  MD2DarkTheme,
+  configureFonts,
+} from "react-native-paper";
 
 export const theme = {
-  ...DefaultTheme,
+  ...MD3LightTheme,
   dark: false,
   colors: {
     textPrimary: "black",
@@ -54,13 +58,7 @@ export const theme = {
     body: 14,
     subheading: 16,
   },
-  fonts: {
-    main: Platform.select({
-      android: "Roboto",
-      ios: "Arial",
-      default: "System",
-    }),
-  },
+  fonts: configureFonts({ config: fontconfig }),
   fontWeights: {
     normal: "400",
     bold: "700",
@@ -70,7 +68,7 @@ export const theme = {
 };
 
 export const darkTheme = {
-  ...DefaultTheme,
+  ...MD2DarkTheme,
   dark: true,
   colors: {
     textPrimary: "white",
@@ -122,17 +120,19 @@ export const darkTheme = {
     body: 14,
     subheading: 16,
   },
-  fonts: {
-    main: Platform.select({
-      android: "Roboto",
-      ios: "Arial",
-      default: "System",
-    }),
-  },
+  fonts: configureFonts({ config: fontconfig }),
   fontWeights: {
     normal: "400",
     bold: "700",
   },
   margin: 5,
   roundness: 10,
+};
+
+const fontconfig = {
+  fontFamily: Platform.select({
+    android: "Roboto",
+    ios: "Arial",
+    default: "System",
+  }),
 };
