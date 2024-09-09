@@ -1,8 +1,4 @@
-import { useState } from 'react';
-import { FlatList, View, Pressable } from 'react-native';
-import { useNavigate } from "react-router-native";
-import { Menu, Button, Searchbar } from 'react-native-paper';
-import { useDebounce } from 'use-debounce';
+import { FlatList } from 'react-native';
 
 import useAuthenticatedUser from '../hooks/useAuthenticatedUser';
 import ReviewItem from './ReviewItem';
@@ -17,7 +13,6 @@ const ReviewList = () => {
     data={reviews}
     renderItem={({ item }) => <ReviewItem item={item} reviewListView={true} />}
     keyExtractor={item => item.id}
-
   />
 };
 

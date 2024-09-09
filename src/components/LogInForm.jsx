@@ -4,7 +4,6 @@ import * as yup from 'yup';
 import { withTheme } from 'react-native-paper';
 
 import Text from './Text';
-//import { formStyles as styles } from './styles';
 import { getFormStyles } from './styles';
 
 const initialValues = {

@@ -2,8 +2,6 @@ import { StyleSheet, Dimensions } from "react-native";
 import Constants from "expo-constants";
 import { useTheme } from "react-native-paper";
 
-//import theme from "./theme";
-
 export const getMainStyles = () => {
   const theme = useTheme();
 
