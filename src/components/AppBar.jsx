@@ -2,7 +2,6 @@ import { View, ScrollView, Pressable } from 'react-native';
 import { Link, useNavigate } from 'react-router-native';
 
 import Text from './Text';
-//import { appBarStyles as styles } from './styles';
 import { getAppBarStyles } from './styles';
 import useAuthenticatedUser from '../hooks/useAuthenticatedUser';
 import useSignOut from '../hooks/useSignOut';
@@ -27,8 +26,11 @@ const AppBar = () => {
       </Link>
       {user ? 
       <>
-        <Link to={"/review"}>
-          <Text style={styles.appBar}> Give a review</Text>
+        <Link to={"/createreview"}>
+          <Text style={styles.appBar}> Create a review</Text>
+        </Link>
+        <Link to={"/reviewlist"}>
+          <Text style={styles.appBar}> My reviews</Text>
         </Link>
         <Pressable onPress={handlePress}>
           <Text style={styles.appBar}> {user.username} - Sign out</Text>

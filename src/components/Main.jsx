@@ -7,6 +7,7 @@ import AppBar from './AppBar';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import CreateReview from './CreateReview';
+import ReviewList from './ReviewList';
 import { getMainStyles } from './styles';
 
 
@@ -20,7 +21,8 @@ const Main = () => {
         <Route path="/:repoId" element={<SingleRepositoryView />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/review' element={<CreateReview />} />
+        <Route path='/createreview' element={<CreateReview />} />
+        <Route path='/reviewlist' element={<ReviewList />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>
