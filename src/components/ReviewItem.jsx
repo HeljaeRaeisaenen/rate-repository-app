@@ -15,7 +15,7 @@ const ReviewItem = ({ item, theme, reviewListView }) => {
         {item.rating}
       </Text>
     </View>
-    <View style={[styles.textArea, {flexDirection: "column", minWidth: 300}]}>
+    <View style={[styles.textArea, {flexDirection: "column"}]}>
       {reviewListView ? (
         <Link to={`/${item.repositoryId}`}>
           <Text style={[styles.textArea, {fontWeight: "bold", fontSize: theme.fontSizes.subheading}]}>

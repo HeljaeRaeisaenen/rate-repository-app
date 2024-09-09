@@ -115,6 +115,7 @@ export const getRepositoryStyles = () => {
       flexDirection: "column",
       justifyContent: "space-between",
       maxWidth: Dimensions.get("window").width - 16,
+      minWidth: Dimensions.get("window").width * 0.7,
       padding: 20,
       marginVertical: 4,
       marginHorizontal: 8,

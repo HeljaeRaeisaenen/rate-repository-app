@@ -54,14 +54,19 @@ const RepositoryItem = ({item, listView, theme }) => {
     <View style={styles.stats}>
       <View style={styles.statItem}>
         <Text style={styles.statText}>
-          {Math.round(item.forksCount / 100)/10}k
+          {item.forksCount > 1000
+          ? (Math.round(item.forksCount / 100)/10 + "k")
+          : item.forksCount}
         </Text>
         <Text> forks
         </Text>
       </View>
       <View style={styles.statItem}>
         <Text style={styles.statText}>
-          {Math.round(item.stargazersCount / 100)/10}k
+          {item.stargazersCount > 1000
+          ? (Math.round(item.stargazersCount / 100)/10 + "k")
+          : item.stargazersCount
+          }
         </Text>
         <Text> stars
         </Text>
