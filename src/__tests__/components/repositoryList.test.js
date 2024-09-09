@@ -1,5 +1,8 @@
 import { render, screen } from "@testing-library/react-native";
+import { PaperProvider } from "react-native-paper";
+
 import { RepositoryListContainer } from "../../components/RepositoryList";
+import { theme } from "../../components/theme";
 
 describe("RepositoryList", () => {
   describe("RepositoryListContainer", () => {
@@ -46,8 +49,11 @@ describe("RepositoryList", () => {
           },
         ],
       };
-      render(<RepositoryListContainer repositories={repositories} />);
-      //screen.debug();
+      render(
+        <PaperProvider theme={theme}>
+          <RepositoryListContainer repositories={repositories} />
+        </PaperProvider>
+      );
 
       const elements = screen.getAllByTestId("repositoryItem");
       expect(elements).toHaveLength(2);
@@ -67,7 +73,7 @@ describe("RepositoryList", () => {
       );
       expect(elements[1]).toHaveTextContent("JavaScript");
       expect(elements[1]).toHaveTextContent("1.8k stars");
-      expect(elements[1]).toHaveTextContent("0.1k forks");
+      expect(elements[1]).toHaveTextContent("69 forks");
       expect(elements[1]).toHaveTextContent("72 rating");
       expect(elements[1]).toHaveTextContent("3 reviews");
     });
