@@ -4,7 +4,6 @@ import * as yup from 'yup';
 import { withTheme } from 'react-native-paper';
 
 import Text from './Text';
-//import { formStyles as styles } from './styles';
 import { getFormStyles } from './styles';
 
 const initialValues = {
@@ -56,7 +55,7 @@ const ReviewForm = ({onSubmit, theme}) => {
           styles.textInput,
           formik.touched.ownerName && formik.errors.ownerName ? {borderColor: theme.colors.error} : {}
         ]}
-        placeholder="Owner's username"
+        placeholder="Repository owner"
         value={formik.values.ownerName}
         onChangeText={formik.handleChange('ownerName')}
       />
